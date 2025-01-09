@@ -12,10 +12,28 @@ const app = express();
 // app.use("/test",(req,res)=>{
 //     res.send("Hello Hello from the server");
 // });
-app.length("/user/:userId/:name/:password", (req,res)=> {
-    console.log(req.params);
-    res.send({firstName: "Nuruz", lastName: "Zaman"})
-});
+app.get(
+    "user", 
+    (req, res,next)=> {
+    console.log("Handling the route user!!");
+    next();
+    },
+    (req, res,next)=> {
+        console.log("Handling the route user2!!");
+        next();
+        },
+        (req, res,next)=> {
+            console.log("Handling the route user3!!");
+            next();
+            },
+            (req, res,next)=> {
+                console.log("Handling the route user4!!");
+                next();
+                },
+    
+
+    
+);
 app.listen(3000,()=> {
     console.log("Server is listening on port 3000....");
 })
