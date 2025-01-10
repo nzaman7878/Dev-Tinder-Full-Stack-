@@ -1,40 +1,26 @@
-const express = require('express');
+const express = require("express");
+const { adminAuth } = require("./middleware/auth");
+
 const app = express();
 
-// app.use("/",(req,res)=>{
-//     res.send("Good Morning Nuruz");
-// });
+// Middleware for admin routes
+app.use("/admin", adminAuth);
 
-// app.use("/hello",(req,res)=>{
-//     res.send("Hello Nuruz");
-// });
+// User route
+app.get("/user", (req, res) => {
+    res.send("User data sent");
+});
 
-// app.use("/test",(req,res)=>{
-//     res.send("Hello Hello from the server");
-// });
-app.get(
-    "user", 
-    (req, res,next)=> {
-    console.log("Handling the route user!!");
-    next();
-    },
-    (req, res,next)=> {
-        console.log("Handling the route user2!!");
-        next();
-        },
-        (req, res,next)=> {
-            console.log("Handling the route user3!!");
-            next();
-            },
-            (req, res,next)=> {
-                console.log("Handling the route user4!!");
-                next();
-                },
-    
+// Admin routes
+app.get("/admin/getAllData", (req, res) => {
+    res.send("All data sent");
+});
 
-    
-);
-app.listen(3000,()=> {
-    console.log("Server is listening on port 3000....");
-})
+app.get("/admin/deleteUser", (req, res) => {
+    res.send("Delete a user");
+});
 
+// Start the server
+app.listen(3000, () => {
+    console.log("Server is listening on port 3000...");
+});
