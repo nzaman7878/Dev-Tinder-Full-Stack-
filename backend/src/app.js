@@ -1,26 +1,23 @@
 const express = require("express");
-const { adminAuth , userAuth} = require("./middleware/auth");
+
 
 const app = express();
 
-// Middleware for admin routes
-app.use("/admin", adminAuth);
-
-app.post("/user/login", (req,res)=> {
-    res.send("user login successfully");
-});
-// User route
-app.get("/user",userAuth, (req, res) => {
-    res.send("User data sent");
-});
-
-// Admin routes
-app.get("/admin/getAllData", (req, res) => {
-    res.send("All data sent");
+// Route to get user data
+app.get("/getUserData", (req, res) => {
+    try {
+        // Logic to interact with the database and get user data
+        throw new Error("Database error occurred"); // Simulating an error
+        res.send("User Data sent"); // This won't be reached due to the error above
+    } catch (err) {
+        res.status(500).send("Some error occurred. Please contact the support team.");
+    }
 });
 
-app.get("/admin/deleteUser", (req, res) => {
-    res.send("Delete a user");
+// Global error-handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack); // Log the error for debugging purposes
+    res.status(500).send("Something went wrong. Please try again later.");
 });
 
 // Start the server
