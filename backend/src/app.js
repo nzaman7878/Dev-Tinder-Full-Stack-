@@ -1,13 +1,16 @@
 const express = require("express");
-const { adminAuth } = require("./middleware/auth");
+const { adminAuth , userAuth} = require("./middleware/auth");
 
 const app = express();
 
 // Middleware for admin routes
 app.use("/admin", adminAuth);
 
+app.post("/user/login", (req,res)=> {
+    res.send("user login successfully");
+});
 // User route
-app.get("/user", (req, res) => {
+app.get("/user",userAuth, (req, res) => {
     res.send("User data sent");
 });
 
