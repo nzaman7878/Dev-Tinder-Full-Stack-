@@ -1,5 +1,5 @@
 const express = require("express");
-
+const connectDB = require("./config/database");
 const app = express();
 
 app.use("/", (err, req, res, next) => {
@@ -25,6 +25,8 @@ app.use("/", (err, req, res, next) => {
     res.status(500).send("something went wrong");
   }
 });
+
+connectDB();
 
 app.listen(3000, () => {
   console.log("Server is successfully listening on port 7777...");
