@@ -2,18 +2,34 @@ const express = require("express");
 const connectDB = require("./config/database");
 const app = express();
 const User = require("./models/user");
+const { validateSignUpData } = require("./utils/validation");
+const bcrypt = require("bcrypt");
 
 app.use(express.json());
 
 app.post("/signup", async (req, res) => {
-  //   Creating a new instance of the User model
-  const user = new User(req.body);
-
   try {
+    // Validation of data
+    validateSignUpData(req);
+
+    const { firstName, lastName, emailId, password } = req.body;
+
+    // Encrypt the password
+    const passwordHash = await bcrypt.hash(password, 10);
+    console.log(passwordHash);
+
+    //   Creating a new instance of the User model
+    const user = new User({
+      firstName,
+      lastName,
+      emailId,
+      password: passwordHash,
+    });
+
     await user.save();
     res.send("User Added successfully!");
   } catch (err) {
-    res.status(400).send("Error saving the user:" + err.message);
+    res.status(400).send("ERROR : " + err.message);
   }
 });
 
@@ -92,11 +108,10 @@ app.patch("/user/:userId", async (req, res) => {
 });
 
 connectDB()
-
   .then(() => {
     console.log("Database connection established...");
-    app.listen(3000, () => {
-      console.log("Server is successfully listening on port 3000...");
+    app.listen(7777, () => {
+      console.log("Server is successfully listening on port 7777...");
     });
   })
   .catch((err) => {
