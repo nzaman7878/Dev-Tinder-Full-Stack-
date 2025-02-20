@@ -40,12 +40,16 @@ authRouter.post("/signup", async (req, res) => {
 authRouter.post("/login", async (req, res) => {
   try {
     const { emailId, password } = req.body;
+    console.log("Received login request with email:", emailId);
 
     const user = await User.findOne({ emailId: emailId });
     if (!user) {
-      throw new Error("Invalid credentials");
+      console.log("User not found for email:", emailId);
+      return res.status(400).json({ message: "User not found" }); // Return JSON
     }
+
     const isPasswordValid = await user.validatePassword(password);
+    console.log("Is password valid:", isPasswordValid);
 
     if (isPasswordValid) {
       const token = await user.getJWT();
@@ -53,12 +57,14 @@ authRouter.post("/login", async (req, res) => {
       res.cookie("token", token, {
         expires: new Date(Date.now() + 8 * 3600000),
       });
-      res.send(user);
+      return res.json(user); // Return JSON
     } else {
-      throw new Error("Invalid credentials");
+      console.log("Invalid password for email:", emailId);
+      return res.status(400).json({ message: "Invalid credentials" }); // Return JSON
     }
   } catch (err) {
-    res.status(400).send("ERROR : " + err.message);
+    console.error("Login error:", err.message);
+    return res.status(400).json({ message: err.message }); // Return JSON
   }
 });
 
