@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken");
-const User = require("../models/user");
+import jwt from "jsonwebtoken";
+import User from "../models/user.js";
 
-const userAuth = async (req, res, next) => {
+export const userAuth = async (req, res, next) => {
   try {
     const { token } = req.cookies;
     if (!token) {
@@ -23,7 +23,4 @@ const userAuth = async (req, res, next) => {
     res.status(400).send("ERROR: " + err.message);
   }
 };
-
-module.exports = {
-  userAuth,
-};
+

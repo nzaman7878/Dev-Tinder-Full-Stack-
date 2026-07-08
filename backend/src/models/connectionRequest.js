@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const connectionRequestSchema = new mongoose.Schema(
   {
@@ -37,9 +37,9 @@ connectionRequestSchema.pre("save", function (next) {
   next();
 });
 
-const ConnectionRequestModel = new mongoose.model(
+const ConnectionRequestModel = mongoose.model(
   "ConnectionRequest",
   connectionRequestSchema
 );
 
-module.exports = ConnectionRequestModel;
+export default ConnectionRequestModel;

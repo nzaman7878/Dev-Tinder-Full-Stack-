@@ -1,6 +1,6 @@
-const validator = require("validator");
+import validator from "validator";
 
-const validateSignUpData = (req) => {
+export const validateSignUpData = (req) => {
   const { firstName, lastName, emailId, password } = req.body;
   if (!firstName || !lastName) {
     throw new Error("Name is not valid!");
@@ -11,7 +11,7 @@ const validateSignUpData = (req) => {
   }
 };
 
-const validateEditProfileData = (req) => {
+export const validateEditProfileData = (req) => {
   const allowedEditFields = [
     "firstName",
     "lastName",
@@ -28,9 +28,4 @@ const validateEditProfileData = (req) => {
   );
 
   return isEditAllowed;
-};
-
-module.exports = {
-  validateSignUpData,
-  validateEditProfileData,
 };

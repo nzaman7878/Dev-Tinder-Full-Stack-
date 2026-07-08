@@ -1,7 +1,7 @@
-const socket = require("socket.io");
-const crypto = require("crypto");
-const { Chat } = require("../models/chat");
-const ConnectionRequest = require("../models/connectionRequest");
+import { Server } from "socket.io";
+import crypto from "crypto";
+import { Chat } from "../models/chat.js";
+import ConnectionRequest from "../models/connectionRequest.js";
 
 const getSecretRoomId = (userId, targetUserId) => {
   return crypto
@@ -11,7 +11,7 @@ const getSecretRoomId = (userId, targetUserId) => {
 };
 
 const initializeSocket = (server) => {
-  const io = socket(server, {
+  const io = new Server(server, {
     cors: {
       origin: "http://localhost:5173",
     },
@@ -62,4 +62,4 @@ const initializeSocket = (server) => {
   });
 };
 
-module.exports = initializeSocket;
+export default initializeSocket;

@@ -1,13 +1,19 @@
-const express = require("express");
-const connectDB = require("./config/database");
+import express from "express";
+import connectDB from "./config/database.js";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import http from "http";
+import "dotenv/config.js";
+
+import authRouter from "./routes/auth.js";
+import profileRouter from "./routes/profile.js";
+import requestRouter from "./routes/request.js";
+import userRouter from "./routes/user.js";
+import paymentRouter from "./routes/payment.js";
+import initializeSocket from "./utils/socket.js";
+import chatRouter from "./routes/chat.js";
+
 const app = express();
-const cookieParser = require("cookie-parser");
-const cors = require("cors");
-const http = require("http");
-
-require("dotenv").config();
-
-require("./utils/cronjob");
 
 app.use(
   cors({
@@ -17,14 +23,6 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
-
-const authRouter = require("./routes/auth");
-const profileRouter = require("./routes/profile");
-const requestRouter = require("./routes/request");
-const userRouter = require("./routes/user");
-const paymentRouter = require("./routes/payment");
-const initializeSocket = require("./utils/socket");
-const chatRouter = require("./routes/chat");
 
 app.use("/", authRouter);
 app.use("/", profileRouter);
@@ -39,8 +37,9 @@ initializeSocket(server);
 connectDB()
   .then(() => {
     console.log("Database connection established...");
-    server.listen(process.env.PORT, () => {
-      console.log("Server is successfully listening on port 7777...");
+    const PORT = process.env.PORT || 3000;
+    server.listen(PORT, () => {
+      console.log(`Server is successfully listening on port ${PORT}...`);
     });
   })
   .catch((err) => {
