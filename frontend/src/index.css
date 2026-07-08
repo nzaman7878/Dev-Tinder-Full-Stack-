@@ -1,2 +1,28 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@theme {
+  --color-bg-base: #09090B;
+  --color-bg-elevated: #111218;
+  --color-bg-card: #18181B;
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-accent-primary: #00E5FF;
+  
+  --font-space: "Space Grotesk", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg-base);
+    color: #e4e4e7;
+    font-family: var(--font-inter);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-space);
+  }
+  code, pre {
+    font-family: var(--font-mono);
+  }
+}
