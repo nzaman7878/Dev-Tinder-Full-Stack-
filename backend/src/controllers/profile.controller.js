@@ -26,6 +26,9 @@ export const editProfile = async (req, res) => {
       data: loggedInUser,
     });
   } catch (err) {
+    if (err.code === 11000) {
+      return res.status(400).json({ message: "Email address is already in use." });
+    }
     res.status(400).json({ message: err.message });
   }
 };
