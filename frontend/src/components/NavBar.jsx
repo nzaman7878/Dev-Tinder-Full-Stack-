@@ -60,6 +60,9 @@ const NavBar = () => {
                   <Link to="/requests" className="hover:bg-[#18181B] hover:text-[#00E5FF] transition-colors rounded-lg py-2">Requests</Link>
                 </li>
                 <li>
+                  <Link to="/chat" className="hover:bg-[#18181B] hover:text-[#00E5FF] transition-colors rounded-lg py-2">Chat</Link>
+                </li>
+                <li>
                   <Link to="/premium" className="hover:bg-[#18181B] hover:text-[#00E5FF] transition-colors rounded-lg py-2">Premium</Link>
                 </li>
                 <div className="divider my-1 border-[rgba(255,255,255,0.05)]"></div>
