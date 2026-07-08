@@ -17,7 +17,7 @@ export const getRequestsReceived = async (req, res) => {
       data: connectionRequests,
     });
   } catch (err) {
-    res.status(400).send("ERROR: " + err.message);
+    res.status(400).json({ message: err.message });
   }
 };
 
@@ -45,7 +45,7 @@ export const getConnections = async (req, res) => {
 
     res.json({ data });
   } catch (err) {
-    res.status(400).send({ message: err.message });
+    res.status(400).json({ message: err.message });
   }
 };
 

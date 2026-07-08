@@ -3,9 +3,9 @@ import { validateEditProfileData } from "../utils/validation.js";
 export const viewProfile = async (req, res) => {
   try {
     const user = req.user;
-    res.send(user);
+    res.json(user);
   } catch (err) {
-    res.status(400).send("ERROR : " + err.message);
+    res.status(400).json({ message: err.message });
   }
 };
 
@@ -26,6 +26,6 @@ export const editProfile = async (req, res) => {
       data: loggedInUser,
     });
   } catch (err) {
-    res.status(400).send("ERROR : " + err.message);
+    res.status(400).json({ message: err.message });
   }
 };

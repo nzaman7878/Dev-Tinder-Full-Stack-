@@ -28,7 +28,7 @@ export const sendRequest = async (req, res) => {
     if (existingConnectionRequest) {
       return res
         .status(400)
-        .send({ message: "Connection Request Already Exists!!" });
+        .json({ message: "Connection Request Already Exists!!" });
     }
 
     const connectionRequest = new ConnectionRequest({
@@ -45,7 +45,7 @@ export const sendRequest = async (req, res) => {
       data,
     });
   } catch (err) {
-    res.status(400).send("ERROR: " + err.message);
+    res.status(400).json({ message: err.message });
   }
 };
 
@@ -76,6 +76,6 @@ export const reviewRequest = async (req, res) => {
 
     res.json({ message: "Connection request " + status, data });
   } catch (err) {
-    res.status(400).send("ERROR: " + err.message);
+    res.status(400).json({ message: err.message });
   }
 };

@@ -30,7 +30,7 @@ export const signup = async (req, res) => {
 
     res.json({ message: "User Added successfully!", data: savedUser });
   } catch (err) {
-    res.status(400).send("ERROR : " + err.message);
+    res.status(400).json({ message: err.message });
   }
 };
 
@@ -69,5 +69,5 @@ export const logout = async (req, res) => {
   res.cookie("token", null, {
     expires: new Date(Date.now()),
   });
-  res.send("Logout Successful!!");
+  res.json({ message: "Logout Successful!!" });
 };
