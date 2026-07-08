@@ -36,12 +36,14 @@ export const getConnections = async (req, res) => {
 
     console.log(connectionRequests);
 
-    const data = connectionRequests.map((row) => {
-      if (row.fromUserId._id.toString() === loggedInUser._id.toString()) {
-        return row.toUserId;
-      }
-      return row.fromUserId;
-    });
+    const data = connectionRequests
+      .filter((row) => row.fromUserId && row.toUserId)
+      .map((row) => {
+        if (row.fromUserId._id.toString() === loggedInUser._id.toString()) {
+          return row.toUserId;
+        }
+        return row.fromUserId;
+      });
 
     res.json({ data });
   } catch (err) {

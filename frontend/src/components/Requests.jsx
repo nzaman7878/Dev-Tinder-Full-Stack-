@@ -56,13 +56,13 @@ const Requests = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-4">
-        {requests.map((request) => {
+        {requests.filter(r => r.fromUserId).map((request) => {
           const { _id, firstName, lastName, photoUrl, age, gender, about } =
             request.fromUserId;
 
           return (
             <div
-              key={_id}
+              key={request._id}
               className="flex flex-col sm:flex-row justify-between items-center p-5 rounded-2xl bg-[#18181B] border border-[rgba(255,255,255,0.08)] transform transition-all duration-300 hover:shadow-lg hover:border-[rgba(255,255,255,0.15)]"
             >
               <div className="flex items-center w-full sm:w-auto mb-4 sm:mb-0">

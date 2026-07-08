@@ -47,7 +47,7 @@ const Connections = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-        {connections.map((connection) => {
+        {connections.filter(c => c).map((connection) => {
           const { _id, firstName, lastName, photoUrl, age, gender, about } =
             connection;
 
