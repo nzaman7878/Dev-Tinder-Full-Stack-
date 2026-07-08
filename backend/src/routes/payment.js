@@ -79,8 +79,7 @@ paymentRouter.post("/payment/webhook", async (req, res) => {
     user.membershipType = payment.notes.membershipType;
     console.log("User saved");
 
-    const res = await user.save();
-    console.log("User Saved", res);
+    await user.save();
 
     // Update the user as premium
 
