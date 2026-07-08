@@ -45,7 +45,7 @@ const NavBar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-[#111218] border border-[rgba(255,255,255,0.08)] rounded-xl z-[1] mt-4 w-56 p-2 shadow-2xl"
+                className="menu menu-sm dropdown-content bg-[#111218]/95 backdrop-blur-xl border border-[rgba(255,255,255,0.08)] rounded-xl z-[1] mt-4 w-56 p-2 shadow-[0_15px_40px_rgba(0,0,0,0.6)]"
               >
                 <li>
                   <Link to="/profile" className="justify-between hover:bg-[#18181B] hover:text-[#00E5FF] transition-colors rounded-lg py-2">
