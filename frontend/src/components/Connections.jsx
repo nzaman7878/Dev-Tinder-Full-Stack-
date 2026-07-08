@@ -72,7 +72,19 @@ const Connections = () => {
                     {age}yo • {gender}
                   </p>
                 )}
-                <p className="text-gray-400 text-sm mt-1 truncate">{about}</p>
+                {connection.skills && connection.skills.length > 0 && (
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    {connection.skills.slice(0, 3).map((skill, i) => (
+                      <span key={i} className="text-[10px] font-mono text-gray-300 bg-[#111218] border border-[rgba(255,255,255,0.08)] px-2 py-0.5 rounded">
+                        {skill}
+                      </span>
+                    ))}
+                    {connection.skills.length > 3 && (
+                      <span className="text-[10px] font-mono text-gray-500 px-1">+{connection.skills.length - 3}</span>
+                    )}
+                  </div>
+                )}
+                <p className="text-gray-400 text-sm mt-2 truncate">{about}</p>
               </div>
               <div>
                 <Link to={"/chat/" + _id}>

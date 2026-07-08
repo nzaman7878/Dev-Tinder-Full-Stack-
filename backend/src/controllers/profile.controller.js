@@ -1,4 +1,5 @@
 import { validateEditProfileData } from "../utils/validation.js";
+import imagekit from "../utils/imagekit.js";
 
 export const viewProfile = async (req, res) => {
   try {
@@ -30,5 +31,30 @@ export const editProfile = async (req, res) => {
       return res.status(400).json({ message: "Email address is already in use." });
     }
     res.status(400).json({ message: err.message });
+  }
+};
+
+export const uploadPhoto = async (req, res) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      return res.status(400).json({ message: "No image file provided" });
+    }
+
+    const result = await imagekit.upload({
+      file: file.buffer,
+      fileName: `user_${req.user._id}_${Date.now()}`,
+      folder: "/devtinder_avatars",
+    });
+
+    req.user.photoUrl = result.url;
+    await req.user.save();
+
+    res.json({
+      message: "Profile photo updated successfully",
+      data: req.user,
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to upload photo: " + err.message });
   }
 };
