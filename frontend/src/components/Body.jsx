@@ -31,13 +31,16 @@ const Body = () => {
     fetchUser();
   }, []);
 
+  const location = window.location.pathname;
+  const isChatRoute = location.startsWith('/chat');
+
   return (
     <div className="flex flex-col min-h-screen font-inter bg-bg-base text-gray-200">
       <NavBar />
-      <main className="flex-grow pt-24 pb-24 px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto">
+      <main className={`flex-grow w-full ${isChatRoute ? 'pt-[72px] h-screen overflow-hidden' : 'pt-24 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto'}`}>
         <Outlet />
       </main>
-      <Footer />
+      {!isChatRoute && <Footer />}
     </div>
   );
 };

@@ -203,7 +203,7 @@ const Chat = () => {
   const activeConnection = connections.find(c => c._id === targetUserId);
 
   return (
-    <div className="flex h-[calc(100vh-80px)] bg-[#0d1516] text-[#dce4e5] font-['Inter'] overflow-hidden">
+    <div className="flex h-full w-full bg-[#0d1516] text-[#dce4e5] font-['Inter'] overflow-hidden">
       
       {/* Sidebar - Connection List */}
       <aside className={`w-full md:w-80 border-r border-[#3b494c]/30 flex flex-col bg-[#0d1516] transition-all ${targetUserId ? 'hidden md:flex' : 'flex'}`}>
