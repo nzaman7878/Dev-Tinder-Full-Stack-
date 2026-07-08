@@ -43,7 +43,6 @@ const EditProfile = ({ user }) => {
   };
 
   return (
-  return (
     <>
       <div className="max-w-6xl mx-auto my-8 px-4 flex flex-col lg:flex-row gap-8 lg:gap-12 animate-fade-in-up">
         <div className="w-full lg:w-3/5 bg-[#111218]/90 backdrop-blur-xl border border-[rgba(255,255,255,0.08)] rounded-3xl p-6 sm:p-8 shadow-2xl">
