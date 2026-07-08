@@ -72,14 +72,15 @@ paymentRouter.post("/payment/webhook", async (req, res) => {
     const payment = await Payment.findOne({ orderId: paymentDetails.order_id });
     payment.status = paymentDetails.status;
     await payment.save();
-    console.log("Payment saved");
+    console.log("Payment saved", payment);
 
     const user = await User.findOne({ _id: payment.userId });
     user.isPremium = true;
     user.membershipType = payment.notes.membershipType;
     console.log("User saved");
 
-    await user.save();
+    const res = await user.save();
+    console.log("User Saved", res);
 
     // Update the user as premium
 
@@ -96,14 +97,12 @@ paymentRouter.post("/payment/webhook", async (req, res) => {
   }
 });
 
-
 paymentRouter.get("/premium/verify", userAuth, async (req, res) => {
-  const user = req.user;
+  const user = req.user.toJSON();
   if (user.isPremium) {
-    return res.json({ isPremium: true });
+    return res.json({ ...user });
   }
-  return res.json({ isPremium: false });
+  return res.json({ ...user });
 });
-
 
 module.exports = paymentRouter;
